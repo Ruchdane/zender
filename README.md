@@ -1,0 +1,1 @@
+Structure de base d'un projet avec mithril,webpack,sass
