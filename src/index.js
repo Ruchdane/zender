@@ -1,11 +1,6 @@
-import m from "mithril";
 import {
-    Counter
-} from "./components/counter/counter";
+    routes as app
+} from './routes';
 import './style.scss';
 
-Counter
-m.route(document.body, "/Counter", {
-    "/Counter": Counter,
-    "/Counter/1": Counter,
-})
+app.setup()

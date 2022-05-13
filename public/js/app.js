@@ -2677,6 +2677,38 @@ var Counter = function Counter(initialVnode) {
 
 /***/ }),
 
+/***/ "./src/routes.js":
+/*!***********************!*\
+  !*** ./src/routes.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "routes": () => (/* binding */ routes)
+/* harmony export */ });
+/* harmony import */ var mithril__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
+/* harmony import */ var mithril__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mithril__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _src_components_counter_counter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/components/counter/counter */ "./src/components/counter/counter.js");
+
+
+var routes = {
+  views: [{
+    title: "Counter",
+    url: "/Counter",
+    view: _src_components_counter_counter__WEBPACK_IMPORTED_MODULE_1__.Counter
+  }],
+  setup: function setup() {
+    var routes = {};
+    this.views.forEach(function (view) {
+      routes[view.url] = view.view;
+    });
+    mithril__WEBPACK_IMPORTED_MODULE_0___default().route(document.body, this.views[0].url, routes);
+  }
+};
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/counter/counter.scss":
 /*!**************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/counter/counter.scss ***!
@@ -2696,7 +2728,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "p {\n  color: red; }\n  p:hover {\n    color: blue; }\n", "",{"version":3,"sources":["webpack://./src/components/counter/counter.scss"],"names":[],"mappings":"AAAA;EACI,UAAU,EAAA;EADd;IAIQ,WAAW,EAAA","sourcesContent":["p {\r\n    color: red;\r\n\r\n    &:hover {\r\n        color: blue;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "button {\n  color: red; }\n  button:hover {\n    color: blue; }\n", "",{"version":3,"sources":["webpack://./src/components/counter/counter.scss"],"names":[],"mappings":"AAAA;EACI,UAAU,EAAA;EADd;IAIQ,WAAW,EAAA","sourcesContent":["button {\r\n    color: red;\r\n\r\n    &:hover {\r\n        color: blue;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3230,18 +3262,11 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var mithril__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mithril */ "./node_modules/mithril/index.js");
-/* harmony import */ var mithril__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mithril__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_counter_counter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/counter/counter */ "./src/components/counter/counter.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./src/routes.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 
 
-
-_components_counter_counter__WEBPACK_IMPORTED_MODULE_1__.Counter;
-mithril__WEBPACK_IMPORTED_MODULE_0___default().route(document.body, "/Counter", {
-  "/Counter": _components_counter_counter__WEBPACK_IMPORTED_MODULE_1__.Counter,
-  "/Counter/1": _components_counter_counter__WEBPACK_IMPORTED_MODULE_1__.Counter
-});
+_routes__WEBPACK_IMPORTED_MODULE_0__.routes.setup();
 })();
 
 /******/ })()
