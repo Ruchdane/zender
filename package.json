@@ -1,11 +1,13 @@
 {
-    "name": "app_frontend",
+    "name": "zender frontend",
     "version": "1.0.0",
     "description": "Le frontend de l'application",
     "main": "index.js",
     "scripts": {
         "start": "webpack -d source-map --watch",
+        "serve": "webpack serve",
         "test": "cypress run",
+        "tauri": "tauri",
         "build": "webpack -p",
         "cypress": "cypress open"
     },
@@ -16,6 +18,8 @@
         "@babel/plugin-transform-react-jsx": "^7.17.3",
         "@babel/preset-env": "^7.16.11",
         "@cypress/webpack-dev-server": "^1.8.4",
+        "@tauri-apps/api": "^1.0.0-rc.5",
+        "@tauri-apps/cli": "^1.0.0-rc.10",
         "babel-loader": "^8.2.3",
         "cypress": "^9.6.1",
         "html-webpack-plugin": "^5.5.0",

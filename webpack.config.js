@@ -18,5 +18,12 @@ module.exports = {
             test: /\.(scss|css)$/,
             use: ['style-loader', 'css-loader', 'sass-loader'],
         }, ]
-    }
+    },
+    devServer: {
+        static: {
+          directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 3000,
+      },
 }

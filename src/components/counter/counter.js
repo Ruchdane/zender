@@ -16,8 +16,8 @@ export const Counter = (initialVnode) => {
         view: function(vnode) {
             return <div>
                 <p> Count {count }</p>
-                <button onclick={increment}>Increment </button>
                 <button onclick={decrement}>Decrement </button>
+                <button onclick={increment}>Increment </button>
             </div>
             //  m("div",
             //     m("p", "Count: " + count),
