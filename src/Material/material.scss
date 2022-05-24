@@ -1,0 +1,15 @@
+$primary:  #c62828;
+$primary-text:#ffffff;
+$primary-light:#ff5f52 ;
+$primary-dark:#8e0000 ;
+
+$secondary:#f7bacf;
+$secondary-text:#000000;
+$secondary-light:#ffeeff;
+$secondary-dark:#c48b9f;
+
+
+body {
+    background-color: $secondary-light;
+    color: $secondary-text;
+}
