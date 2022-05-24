@@ -9,7 +9,8 @@ $secondary-light:#ffeeff;
 $secondary-dark:#c48b9f;
 
 
-body {
+.app {
     background-color: $secondary-light;
     color: $secondary-text;
+    display: flex;
 }
