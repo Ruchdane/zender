@@ -1,1 +1,1 @@
-Structure de base d'un projet avec mithril,webpack,sass
+Logiciel d'échange de fichiers sur un réseau local.
