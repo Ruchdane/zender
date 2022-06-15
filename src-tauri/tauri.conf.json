@@ -11,8 +11,38 @@
     "version": "0.1.0"
   },
   "tauri": {
+    "cli": {
+      "description": "command description that's shown on help",
+      "longDescription": "command long description that's shown on help",
+      "beforeHelp": "",
+      "afterHelp": "",
+      "args": [
+        {
+          "name": "silent",
+          "short": "s",
+          "description": "Executer sans l'interface graphique"
+        },
+        {
+          "name": "files",
+          "short": "f",
+          "description": "fichier(s) à envoyer",
+          "index": 1,
+          "takesValue": true,
+          "multiple": true
+        }
+      ]
+    },
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "renameFile": true
+      }
     },
     "bundle": {
       "active": true,
