@@ -1,5 +1,5 @@
 {
-  "$schema": "..\\node_modules/@tauri-apps/cli\\schema.json",
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
@@ -33,15 +33,16 @@
       ]
     },
     "allowlist": {
-      "all": true,
+      "dialog": {
+        "open": true,
+        "message":true
+      },
       "fs": {
-        "all": true,
         "readFile": true,
         "writeFile": true,
         "readDir": true,
         "copyFile": true,
-        "createDir": true,
-        "renameFile": true
+        "createDir": true
       }
     },
     "bundle": {
@@ -89,7 +90,15 @@
         "height": 600,
         "resizable": true,
         "title": "Zender",
-        "width": 800
+        "width": 800,
+        "visible": false
+      },
+      {
+          "width": 400,
+          "height": 200,
+          "decorations": false,
+          "url": "/splashscreen.html",
+          "label": "splashscreen"
       }
     ]
   }
