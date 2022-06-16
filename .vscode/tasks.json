@@ -3,13 +3,9 @@
   "tasks": [
     {
       "label": "ui:dev",
-      "type": "shell",
-      "isBackground": true,
-      "command": "npm",
-      "args": [
-        "run",
-        "serve"
-      ]
+      "type": "npm",
+      "script": "serve",
+      "detail": "webpack serve"
     },
     {
       "label": "ui:build",
