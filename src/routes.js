@@ -4,11 +4,11 @@ import {
 } from "./components/counter/counter";
 import Material from "./view/material";
 import download from "./view/download.js"
-import home from "./view/home.js"
+import home from "./view/home/home.js"
 import settings from "./view/settings.js"
 import shared from "./view/shared.js"
 import shared_detail from "./view/shared_detail.js"
-import users from "./view/users.js"
+import users from "./view/users/users.js"
 import users_shared from "./view/users_shared.js"
 
 function View(title,url,view){
