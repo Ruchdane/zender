@@ -1,0 +1,33 @@
+@import '../style.scss';
+@import "../../Material/button/button.scss";
+
+.home{ 
+    @extend %content;
+    overflow-y: auto;
+    .header{
+        display: flex;
+        padding-top: 10px;
+        padding-left: 2px;
+        padding-right: 2px;
+        justify-content: space-between;
+        *
+        {
+            margin-right: 3px;
+        }
+    }
+    hr{
+        color: $primary-dark;
+    }
+    .files-grid{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.files-grid{
+    .file{
+        flex:0 0 auto;
+        margin-left: 5px;
+        margin-bottom: 5px;
+    }
+}

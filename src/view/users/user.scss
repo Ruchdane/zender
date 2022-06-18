@@ -1,5 +1,76 @@
-@import "../style.scss"
+@import "../style.scss";
 
-main{
-    
+.users {
+    @extend %content;
+    display: flex;
+    .addresse-bar {    
+        flex-flow: column;
+        display: flex;
+        background-color: $primary-shade-4;
+        padding: 5px;
+        :first-child{
+            justify-content: stretch;   
+            align-self: center;
+        }
+        :last-child{
+            flex-wrap: wrap;
+        }
+        & > * {
+            display: flex;
+            justify-content: space-between;
+        }
+        label,center{
+            font-weight: bolder;
+        }
+        center{
+            align-self: center;
+        }
+        .addresse{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+    }
+    .no-peer{
+        color: fade-out($color: $primary-text, $amount: 0.1);
+        cursor: pointer;
+        position: relative;
+        top: 50%;
+        margin-left:auto;
+        margin-right: auto;
+        overflow: hidden;
+    }
+    :last-child{
+        overflow-y: auto;
+    }
+    .users-grid {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem;
+        
+    }
+}
+
+.user {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    padding-top: 0.3rem;
+    margin: 6px;
+    padding-bottom: 0.3rem;
+    cursor: pointer;
+    text-overflow: ellipsis;
+
+    &:hover {
+        background-color: fade-out($color: $primary-dark, $amount: 0.5);
+        color: $secondary-light ;
+    }
+
+    &:active {
+        background-color: $primary-dark;
+        color: $secondary-light;
+    }
 }

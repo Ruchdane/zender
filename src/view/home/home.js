@@ -1,9 +1,7 @@
 import m from "mithril";
 import { routes } from "../../routes";
 import { AddFiles } from "../../controller/file";
-import "../../Material/material.scss";
-import "../style.scss";
-import "../../Material/button/button.scss";
+import './home.scss'
 
 import Sidebar from "../../components/sidebar/sidebar";
 import FileView from "../../components/file/file";
