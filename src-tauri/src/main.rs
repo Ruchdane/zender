@@ -4,6 +4,8 @@
 mod commands;
 mod file;
 mod tests;
+mod network;
+mod user;
 
 fn main() {
   // let context = tauri::generate_context!();
