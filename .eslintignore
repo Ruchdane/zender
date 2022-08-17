@@ -1,4 +1,4 @@
-src-tauri
+src-tauri/*.js
 logs
 *.log
 npm-debug.log*
@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+
+cypress/*
 
 .vscode/*
 !.vscode/extensions.json

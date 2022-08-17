@@ -1,9 +1,9 @@
-import m from 'mithril'
-import "./counter.scss"
-import { Button } from '../../Material/button/button';
+import m from "mithril";
+import "./counter.scss";
+import { Button } from "../../Material/button/button";
 
 export const Counter = (initialVnode) => {
-    var count = 0
+    let count = 0;
 
     function increment() {
         count++;
@@ -14,12 +14,18 @@ export const Counter = (initialVnode) => {
     }
 
     return {
-        view: function(vnode) {
-            return <div>
-                <p> Count {count }</p>
-                <Button type="primary" onclick={decrement}>Decrement </Button>
-                <Button type="secondary" onclick={increment}>Increment </Button>
-            </div>
+        view: function (vnode) {
+            return (
+                <div>
+                    <p> Count {count}</p>
+                    <Button type="primary" onclick={decrement}>
+                        Decrement{" "}
+                    </Button>
+                    <Button type="secondary" onclick={increment}>
+                        Increment{" "}
+                    </Button>
+                </div>
+            );
             //  m("div",
             //     m("p", "Count: " + count),
             //     m("button", {
@@ -29,6 +35,6 @@ export const Counter = (initialVnode) => {
             //         onclick: decrement
             //     }, "Decrement")
             // )
-        }
-    }
-} 
+        },
+    };
+};
