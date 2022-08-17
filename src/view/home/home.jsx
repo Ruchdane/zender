@@ -1,15 +1,15 @@
 import m from "mithril";
 import { routes } from "../../routes";
 import { AddFiles } from "../../controller/file";
-import "../../Material/material.scss";
+
 import "../style.scss";
-import "../../Material/button/button.scss";
+
 
 import Sidebar from "../../components/sidebar/sidebar";
 import FileView from "../../components/file/file";
-import Tooltip from "../../Material/tooltip/tooltip.js";
+import { Tooltip } from "construct-ui";
 
-import file from "../../components/file/file";
+// import file from "../../components/file/file";
 
 const settings = {
     files: new Set(),
@@ -31,7 +31,7 @@ const settings = {
         list: false,
         selection: new Set(),
         isSelectionEmpty() {
-            return this.selection.size != 0;
+            return this.selection.size !== 0;
         },
         isSelected(i) {
             return this.selection.has(i);
@@ -122,15 +122,8 @@ const Home = {
                                             path,
                                             grid: false,
                                             id: i,
-                                            selected:
-                                                settings.header_option.isSelected(
-                                                    i
-                                                ),
-                                            onclick: () => {
-                                                settings.header_option.clickOnElement(
-                                                    i
-                                                );
-                                            },
+                                            selected:settings.header_option.isSelected(i),
+                                            onclick: () => {settings.header_option.clickOnElement(i);},
                                         });
                                     })}
                                 </tbody>

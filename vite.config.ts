@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig({
-  // plugins: [eslintPlugin()],
+  plugins: [eslintPlugin()],
   // prevent vite from obscuring rust errors
   clearScreen: false,
   // Tauri expects a fixed port, fail if that port is not available

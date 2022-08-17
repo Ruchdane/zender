@@ -4,12 +4,11 @@
     padding: 0;
     list-style-type: none;
     position: absolute;
-
 }
 
 .sidebar {
-    background-color: $primary-dark;
-    color: $primary-light;
+    background-color: var(--bg-secondary);
+    color: var(--color);
     position: absolute;
     width: $sidebar-width;
 
@@ -27,18 +26,18 @@
     }
     .item {
         font-size: $sidebar-icon-size;
-        padding: $sidbar-padding;
+        padding: $sidebar-padding;
         cursor: pointer;
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     }
     :hover.item{
-        color: $primary-text;
+        color: var(--hover-color);
 
     }
     .active{
         box-shadow: inset 3px 0px 20px 0px black;
-        background-color: $primary-light;
-        color: $primary-text;
+        background-color: var(--active-bg);
+        color: var(--active-color);
     }
 }

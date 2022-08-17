@@ -1,8 +1,8 @@
 import m from "mithril";
 import { routes } from "../../routes";
-import "../../Material/material.scss";
+
 import Sidebar from "../../components/sidebar/sidebar";
-import { Button } from "../../Material/button/button";
+import { Button } from "construct-ui";
 
 const model = {
     users: [
@@ -32,8 +32,8 @@ const Users = {
                         </form>
                     </div>
                     <div>
-                        {model.users.map((user) => (
-                            <div>
+                        {model.users.map((user,index) => (
+                            <div key={index}>
                                 <img src={user.profile} />
                                 <svg>
                                     <rect></rect>

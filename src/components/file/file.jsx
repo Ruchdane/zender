@@ -1,7 +1,7 @@
 import m from "mithril";
 import { GetFilesProperties } from "../../controller/file";
 import "./file.scss";
-function TypeToClass(extension, is_dir) {
+function TypeToClass(extension, isDir) {
     const foo = [
         "aac",
         "ai",
@@ -49,13 +49,13 @@ function TypeToClass(extension, is_dir) {
         "xml",
         "yml",
     ];
-    if (is_dir) return "folder";
+    if (isDir) return "folder";
     else if (foo.includes(extension)) return "filetype-" + extension;
     return "file";
 }
 
-function ExtensionToType(extension, is_dir) {
-    if (is_dir) {
+function ExtensionToType(extension, isDir) {
+    if (isDir) {
         return "Dossier";
     }
     return extension;
@@ -65,7 +65,7 @@ function file(initVnode) {
     let metadata = {
         file_path: "",
         basename: "unknown",
-        is_dir: false,
+        isDir: false,
         is_file: false,
         size: 0,
         last_modified: null,
@@ -101,7 +101,7 @@ function file(initVnode) {
                                   "bi-" +
                                   TypeToClass(
                                       GetExtension(metadata),
-                                      metadata.is_dir
+                                      metadata.isDir
                                   )
                               }
                           />
@@ -123,7 +123,7 @@ function file(initVnode) {
                           onclick={vnode.attrs.onclick}>
                           <td>{metadata.basename}</td>
                           <td>{ExtensionToType(GetExtension(metadata))}</td>
-                          <td>{!metadata.is_dir ? metadata.size : ""}</td>
+                          <td>{!metadata.isDir ? metadata.size : ""}</td>
                       </tr>
                   );
               },

@@ -1,6 +1,6 @@
 import m from "mithril";
 import "./counter.scss";
-import { Button } from "../../Material/button/button";
+import { Button } from "construct-ui";
 
 export const Counter = (initialVnode) => {
     let count = 0;

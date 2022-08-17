@@ -6,7 +6,7 @@
     "scripts": {
         "start": "tauri dev",
         "start:ui": "vite",
-        "build":"tauri build",
+        "build": "tauri build",
         "build:ui": "vite build",
         "test:unit": "npx vitest -r src-mithril/component",
         "test:view": "npx vitest -r src-mithril/view",
@@ -19,6 +19,7 @@
     "devDependencies": {
         "@faker-js/faker": "^7.4.0",
         "@tauri-apps/cli": "^1.0.0",
+        "@types/mithril": "^2.0.11",
         "eslint": "^8.19.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-config-standard": "^17.0.0",

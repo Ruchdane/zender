@@ -1,18 +1,17 @@
-@import '../../Material/material.scss';
-
+@import "../../style.scss";
 .file{
     cursor: pointer;
 }
 
 .file:hover {
-    background-color: fade-out($color: $primary-dark, $amount: 0.5)!important;
-    color: $secondary-light!important;
+    background-color: var(--hover-color);
+    color: var(--color);
 }
 .file.selected{
-    background-color: $primary-dark!important;
-    color: $secondary-light!important;
+    background-color: var(--selected-color);
+    color: var(--color);
     &:hover{
-        color: $secondary-light!important;
+        color: var(--color);
     }
 }
 .files-grid{

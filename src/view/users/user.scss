@@ -65,12 +65,12 @@
     text-overflow: ellipsis;
 
     &:hover {
-        background-color: fade-out($color: $primary-dark, $amount: 0.5);
+        background-color: fade-out($color: var(--bg), $amount: 0.5);
         color: $secondary-light ;
     }
 
     &:active {
-        background-color: $primary-dark;
+        background-color: var(--bg);
         color: $secondary-light;
     }
 }

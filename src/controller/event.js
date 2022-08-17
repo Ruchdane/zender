@@ -1,4 +1,4 @@
-import { listen, emit } from "@tauri-apps/api/event";
+// import { listen, emit } from "@tauri-apps/api/event";
 import { invoke } from "@tauri-apps/api";
 
 /* async */ function setup() {

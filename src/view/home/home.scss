@@ -1,6 +1,4 @@
 @import '../style.scss';
-@import "../../Material/button/button.scss";
-
 .home{ 
     @extend %content;
     overflow-y: auto;
@@ -16,7 +14,7 @@
         }
     }
     hr{
-        color: $primary-dark;
+        color: var(--bg);
     }
     .files-grid{
         display: flex;

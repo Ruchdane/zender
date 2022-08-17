@@ -10,7 +10,7 @@ const Item = {
             m(
                 m.route.Link,
                 {
-                    selector: "div",
+                    selector: "a",
                     href: vnode.attrs.url,
                 },
                 m("i.bi[aria-hidden='true']", {
