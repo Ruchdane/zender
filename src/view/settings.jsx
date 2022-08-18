@@ -4,16 +4,16 @@ import { routes } from "../routes";
 import Sidebar from "../components/sidebar/sidebar";
 
 const Settings = {
-    oninit(vnode) {
-        routes.settile();
-    },
-    view(vnode) {
-        return (
-            <>
-                <Sidebar />
-                <main>Settings</main>
-            </>
-        );
-    },
+	oninit(vnode) {
+		routes.settile();
+	},
+	view(vnode) {
+		return (
+			<>
+				<Sidebar />
+				<main>Settings</main>
+			</>
+		);
+	},
 };
 export default Settings;

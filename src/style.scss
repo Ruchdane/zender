@@ -1,11 +1,7 @@
-$sidebar-padding: 5px;
-$sidebar-icon-size: 2rem;
-$sidebar-width: 42px;
-$append: --;
 @mixin theme($name,$theme) {
     #{$name} {
         @each $attr in map-keys($theme) {
-            #{$append}#{$attr}: map-get($theme, $attr);
+            --#{$attr}: #{map-get($theme, $attr)};
         } 
     }
 }
@@ -14,13 +10,17 @@ $white-color: black;
 $white: (
     bg: $white-bg,
     color: $white-color,
-    bg-secondary: darken($white-bg,1),
+    bg-secondary: darken($white-bg,15),
     hover-bg:  fade-out($color: $white-color, $amount: 0.5),
-    hover-color:  fade-out($color: $white-bg, $amount: 0.5),
+    hover-color:  fade-out($color: $white-color, $amount: 0.5),
     selected-bg: fade-out($color: $white-bg, $amount: 0.5),
     selected-color: fade-out($color: $white-color, $amount: 0.1),
     active-bg: fade-out($color: $white-bg, $amount: 0.1),
-    active-color: fade-out($color: $white-color, $amount: 0.3)
+    active-color: fade-out($color: $white-color, $amount: 0.3),
+    sidebar-padding: 10px,
+    sidebar-icon-size: 2rem,
+    icon-height: 20px,
+    icon-width: 20px,
 );
 
 $dark: (
@@ -36,3 +36,18 @@ $dark: (
     @include theme(":root",$white);
 }
 
+
+.app {
+    margin: 0;
+    display: flex;
+    overflow-y: auto;
+}
+
+.icon {
+    display: block;
+    stroke: currentColor;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}

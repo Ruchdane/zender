@@ -1,4 +1,4 @@
-src-tauri/*.js
+src-tauri/*
 logs
 *.log
 npm-debug.log*
