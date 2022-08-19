@@ -22,10 +22,22 @@ $white: (
     icon-height: 20px,
     icon-width: 20px,
 );
-
+$black-bg: black;
+$black-color: white;
 $dark: (
-    bg: black,
-    color: white
+    bg: $black-bg,
+    color: $black-color,
+    bg-secondary: lighten($black-bg,15),
+    hover-bg:  fade-out($color: $black-color, $amount: 0.5),
+    hover-color:  fade-out($color: $black-color, $amount: 0.5),
+    selected-bg: fade-out($color: $black-bg, $amount: 0.5),
+    selected-color: fade-out($color: $black-color, $amount: 0.1),
+    active-bg: fade-out($color: $black-bg, $amount: 0.1),
+    active-color: fade-out($color: $black-color, $amount: 0.3),
+    sidebar-padding: 10px,
+    sidebar-icon-size: 2rem,
+    icon-height: 20px,
+    icon-width: 20px,
 );
 
 @media (prefers-color-scheme: dark) {
@@ -34,20 +46,4 @@ $dark: (
 
 @media (prefers-color-scheme: light) {
     @include theme(":root",$white);
-}
-
-
-.app {
-    margin: 0;
-    display: flex;
-    overflow-y: auto;
-}
-
-.icon {
-    display: block;
-    stroke: currentColor;
-    stroke-width: 2px;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
 }
