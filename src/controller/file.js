@@ -1,17 +1,20 @@
-import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api";
 import { log } from "./error";
-function AddFiles(callback) {
-	return open({
-		multiple: true,
-	})
-		.then((value) => callback(value))
-		.catch((err) => log(err));
-}
-function GetFilesProperties(path, callback) {
-	return invoke("get_file_metadata", { path })
-		.then((metadata) => callback(metadata))
-		.catch((err) => log(err));
+
+export async function GetNonHiddenFilesInPath(path) {
+	try {
+		const metadata = await invoke("get_files_in_path", { path, hiden: false, link: true });
+		return metadata;
+	} catch (err) {
+		return await log(err);
+	}
 }
 
-export { AddFiles, GetFilesProperties };
+export async function GetSysdata(path) {
+	try {
+		const sysdata = await invoke("get_sysdata_of_path", { path });
+		return sysdata
+	} catch (err) {
+		return await log(err);
+	}
+}

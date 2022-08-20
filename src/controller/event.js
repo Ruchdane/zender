@@ -7,9 +7,6 @@ import { invoke } from "@tauri-apps/api";
 			// This will wait for the window to load, but you could
 			// run this function on whatever trigger you want
 			invoke("close_splashscreen");
-			invoke("who_invoked_you", {
-				invoker: "Dom content loader",
-			});
 		});
 }
 export { setup };

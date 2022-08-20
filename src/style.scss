@@ -1,18 +1,19 @@
-@mixin theme($name,$theme) {
+@mixin theme($name, $theme) {
     #{$name} {
         @each $attr in map-keys($theme) {
             --#{$attr}: #{map-get($theme, $attr)};
-        } 
+        }
     }
 }
+
 $white-bg: white;
 $white-color: black;
 $white: (
     bg: $white-bg,
     color: $white-color,
-    bg-secondary: darken($white-bg,15),
-    hover-bg:  fade-out($color: $white-color, $amount: 0.5),
-    hover-color:  fade-out($color: $white-color, $amount: 0.5),
+    bg-secondary: darken($white-bg, 15),
+    hover-bg: fade-out($color: $white-color, $amount: 0.5),
+    hover-color: fade-out($color: $white-color, $amount: 0.5),
     selected-bg: fade-out($color: $white-bg, $amount: 0.5),
     selected-color: fade-out($color: $white-color, $amount: 0.1),
     active-bg: fade-out($color: $white-bg, $amount: 0.1),
@@ -22,14 +23,14 @@ $white: (
     icon-height: 20px,
     icon-width: 20px,
 );
-$black-bg: black;
+$black-bg: lighten(black, 5);
 $black-color: white;
 $dark: (
     bg: $black-bg,
     color: $black-color,
-    bg-secondary: lighten($black-bg,15),
-    hover-bg:  fade-out($color: $black-color, $amount: 0.5),
-    hover-color:  fade-out($color: $black-color, $amount: 0.5),
+    bg-secondary: lighten($black-bg, 15),
+    hover-bg: fade-out($color: $black-color, $amount: 0.5),
+    hover-color: fade-out($color: $black-color, $amount: 0.5),
     selected-bg: fade-out($color: $black-bg, $amount: 0.5),
     selected-color: fade-out($color: $black-color, $amount: 0.1),
     active-bg: fade-out($color: $black-bg, $amount: 0.1),
@@ -41,9 +42,9 @@ $dark: (
 );
 
 @media (prefers-color-scheme: dark) {
-    @include theme(":root",$dark);
+    @include theme(":root", $dark);
 }
 
 @media (prefers-color-scheme: light) {
-    @include theme(":root",$white);
+    @include theme(":root", $white);
 }
