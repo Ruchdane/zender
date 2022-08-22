@@ -1,4 +1,5 @@
-#[derive(serde::Serialize, Clone, Debug)]
+use serde::Serialize;
+#[derive(Serialize, Clone, Debug)]
 pub struct Adapter {
     adapter: String,
     addresses: String,
@@ -12,3 +13,4 @@ impl Adapter {
         }];
     }
 }
+
