@@ -4,7 +4,7 @@
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
     "devPath": "http://localhost:3000",
-    "distDir": "../public"
+    "distDir": "../dist"
   },
   "package": {
     "productName": "zender",
