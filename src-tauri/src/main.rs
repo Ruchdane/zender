@@ -28,7 +28,8 @@ fn main() {
             commands::who_invoked_you,
             commands::close_splashscreen,
             file::get_sysdata_of_path,
-            file::get_metadata_of_path
+            file::get_metadata_of_path,
+            user::get_local_user
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
