@@ -1,4 +1,3 @@
-extern crate pnet;
 use pnet_datalink::interfaces;
 use serde::Serialize;
 #[derive(Serialize, Clone, Debug)]

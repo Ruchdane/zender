@@ -9,9 +9,25 @@ import { FilesGridView } from "./FilesGridView";
 import { FilesListView } from "./FilesListView";
 import { Path } from "./Path";
 import { Button, Icons, Tooltip } from "construct-ui";
-import { GetNonHiddenFilesInPath } from "../../controller/file";
+import { GetMetadata, MetadataType } from "../../controller/file";
+import { log } from "../../controller/error";
 
 // import file from "../../components/file/file";
+export const filesModel = {
+	metadatas: [],
+	async load(paths) {
+		this.metadatas = Array.from(paths);
+		try {
+			for (let i = 0; i < this.metadatas.length; i++) {
+				this.metadatas[i] = await GetMetadata(paths[i])
+				m.redraw();
+			}
+		} catch (error) {
+			log(error)
+		}
+	}
+}
+
 export const model = {
 	files: [],
 	selection: new Set(),
@@ -26,9 +42,14 @@ export const model = {
 	async init() {
 		try {
 			model._path = await path.homeDir();
-			model.files = await GetNonHiddenFilesInPath(model._path);
+			const metadata = await GetMetadata(model._path);
+			if (metadata.type === MetadataType.Folder) {
+				model.files = metadata.children;
+				filesModel.load(model.files)
+			}
+
 		} catch (error) {
-			console.log(error);
+			log(error)
 		}
 	},
 	goToParentDir() {
@@ -50,7 +71,7 @@ const Home = {
 		model.init().then(() => m.redraw())
 	},
 	view(vnode) {
-		const displayName = model.displayList ? "list" : "grid";
+		const displayName = !model.displayList ? "list" : "grid";
 		const tooltip = `Toogle ${displayName}  view`
 		return (
 			<>

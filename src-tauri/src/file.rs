@@ -153,6 +153,7 @@ impl LinkMetadata {
 /// Information on everything that can be found on the disk
 
 #[derive(Debug, Serialize)]
+#[serde(tag = "type")]
 pub enum Metadata {
     File(FileMetadata),
     Folder(FolderMetadata),
@@ -181,6 +182,10 @@ impl Metadata {
 mod util {
     use super::*;
     use std::fs::Metadata;
+    
+    #[cfg(windows)]
+    use std::os::windows::fs::MetadataExt;
+    
     #[inline]
     pub fn get_type(filename: &str) -> String {
         mime_guess::from_path(filename)

@@ -3,20 +3,25 @@ import { routes } from "../../routes";
 
 import Sidebar from "../../components/sidebar/sidebar";
 import { Button } from "construct-ui";
+import { GetLocalUser, GetPeer } from "../../controller/file";
 
 const model = {
-	users: [
-		{
-			profile: "",
-			name: "ruchdane",
-			hostname: "origin",
-		},
-	],
+	user: undefined,
+	peer: [],
+	async init() {
+		this.user = await GetLocalUser();
+		this.peer = await GetPeer();
+	}
 };
-
+/**
+ * List all known users(connected or not)
+ * Search users
+ * Display info about yourself
+ */
 const Users = {
 	oninit(vnode) {
 		routes.settile();
+		model.init().then(() => m.redraw())
 	},
 	view(vnode) {
 		return (
@@ -32,7 +37,7 @@ const Users = {
 						</form>
 					</div>
 					<div>
-						{model.users.map((user, index) => (
+						{model.user?.map((user, index) => (
 							<div key={index}>
 								<img src={user.profile} />
 								<svg>

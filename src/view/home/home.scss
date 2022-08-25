@@ -46,6 +46,23 @@
 }
 
 .files-grid {
+    .skeleton {
+        height: 100px;
+        width: 40px;
+        display: flex;
+        flex-direction: row;
+
+        .name {
+            margin: 10px;
+            height: 75%;
+        }
+
+        .icon {
+            height: 10px;
+            margin: 10px;
+        }
+    }
+
     .file {
         flex: 0 0 auto;
         margin-left: 5px;
