@@ -89,6 +89,7 @@
     },
     "windows": [
       {
+        "center": true,
         "fullscreen": false,
         "height": 600,
         "resizable": true,
@@ -97,6 +98,7 @@
         "visible": false
       },
       {
+        "center": true,
         "width": 400,
         "height": 200,
         "decorations": false,

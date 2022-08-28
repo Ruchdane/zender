@@ -30,6 +30,8 @@ $black-color: white;
 $dark: (
     bg: $black-bg,
     color: $black-color,
+    // Uns selectable test
+    uncolor: darken($black-color, 50),
     bg-secondary: lighten($black-bg, 15),
     hover-bg: fade-out($color: $black-color, $amount: 0.5),
     hover-color: fade-out($color: $black-color, $amount: 0.5),
@@ -43,6 +45,7 @@ $dark: (
     sidebar-icon-size: 2rem,
     icon-height: 20px,
     icon-width: 20px,
+    item-height: 40px,
 );
 
 @media (prefers-color-scheme: dark) {

@@ -1,5 +1,8 @@
 import { invoke } from "@tauri-apps/api";
 import { log } from "./error";
+// I would like to switch to typescript 
+// https://dev.to/dimfeld/synchronizing-rust-types-with-typescript-1maa
+
 // Is it necessary why not simply use the invoke 
 // and let them handle the error
 export const MetadataType = {
@@ -7,9 +10,11 @@ export const MetadataType = {
 	Folder: "Folder",
 	Link: "Link",
 }
+// FIXME error lorsqu'on recherche les metadata de C
 export async function GetMetadata(path) {
 	try {
 		const metadata = await invoke("get_metadata_of_path", { path });
+		setTimeout(() => { }, 1000000);
 		return metadata;
 	} catch (err) {
 		return await log(err);

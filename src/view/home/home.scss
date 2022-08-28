@@ -46,26 +46,78 @@
 }
 
 .files-grid {
-    .skeleton {
-        height: 100px;
-        width: 40px;
-        display: flex;
-        flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
 
-        .name {
+    .skeleton {
+        flex: 0 0 auto;
+        margin-left: 5px;
+        padding: 10px;
+        color: var(--color);
+        width: calc(1/13) * 100%;
+        text-align: center;
+
+        .title {
             margin: 10px;
-            height: 75%;
+            height: 1rem;
         }
 
         .icon {
-            height: 10px;
             margin: 10px;
+            height: 2rem;
+            width: 100%;
         }
+    }
+
+    .empty {
+        align-self: center;
+        margin: auto;
+        color: var(--uncolor)
     }
 
     .file {
         flex: 0 0 auto;
         margin-left: 5px;
         margin-bottom: 5px;
+        padding: 10px;
+        cursor: pointer;
+        color: var(--color);
+        width: calc(1/13) * 100%;
+        text-align: center;
+
+        .icon {
+            display: block;
+            stroke: currentColor;
+            stroke-width: 2px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            color: var(--color);
+
+            svg {
+                height: var(--item-height);
+                width: auto;
+                margin: 0 auto;
+            }
+
+        }
+
+        .title {
+            text-overflow: ellipsis;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        &.selected {
+            background-color: var(--bg-secondary);
+        }
+
+        // TODO refactor this
+        &:hover {
+            background-color: var(--hover-bg);
+            color: var(--hover-color);
+        }
     }
+
 }
