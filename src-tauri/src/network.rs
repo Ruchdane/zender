@@ -1,7 +1,9 @@
 extern crate pnet;
 use pnet_datalink::interfaces;
+use schemars::JsonSchema;
 use serde::Serialize;
-#[derive(Serialize, Clone, Debug)]
+
+#[derive(Serialize, Clone, Debug, JsonSchema)]
 pub struct Adapter {
     pub name: String,
     pub description: String,

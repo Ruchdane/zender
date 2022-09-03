@@ -1,0 +1,216 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Metadata",
+  "description": "Information on everything that can be found on the disk",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "File"
+      ],
+      "properties": {
+        "File": {
+          "$ref": "#/definitions/FileMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Folder"
+      ],
+      "properties": {
+        "Folder": {
+          "$ref": "#/definitions/FolderMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "Link"
+      ],
+      "properties": {
+        "Link": {
+          "$ref": "#/definitions/LinkMetadata"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "FileMetadata": {
+      "description": "Specifique Information about file",
+      "type": "object",
+      "required": [
+        "filetype",
+        "size",
+        "sysdata"
+      ],
+      "properties": {
+        "filetype": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0.0
+        },
+        "sysdata": {
+          "$ref": "#/definitions/Sysdata"
+        }
+      }
+    },
+    "FolderMetadata": {
+      "description": "Specifique Information about a folder",
+      "type": "object",
+      "required": [
+        "children",
+        "sysdata"
+      ],
+      "properties": {
+        "children": {
+          "description": "The count of everything that can be found inside",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sysdata": {
+          "$ref": "#/definitions/Sysdata"
+        }
+      }
+    },
+    "LinkMetadata": {
+      "description": "Specifique Information about a link",
+      "type": "object",
+      "required": [
+        "path",
+        "sysdata"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sysdata": {
+          "$ref": "#/definitions/Sysdata"
+        }
+      }
+    },
+    "OsString": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "Unix"
+          ],
+          "properties": {
+            "Unix": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "uint8",
+                "minimum": 0.0
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "Windows"
+          ],
+          "properties": {
+            "Windows": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "uint16",
+                "minimum": 0.0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Sysdata": {
+      "description": "Global \"item\" Information",
+      "type": "object",
+      "required": [
+        "basename",
+        "is_dir",
+        "is_hidden",
+        "is_link",
+        "path"
+      ],
+      "properties": {
+        "basename": {
+          "$ref": "#/definitions/OsString"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SystemTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "is_dir": {
+          "type": "boolean"
+        },
+        "is_hidden": {
+          "type": "boolean"
+        },
+        "is_link": {
+          "type": "boolean"
+        },
+        "last_accessed": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SystemTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_modified": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SystemTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "SystemTime": {
+      "type": "object",
+      "required": [
+        "nanos_since_epoch",
+        "secs_since_epoch"
+      ],
+      "properties": {
+        "nanos_since_epoch": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "secs_since_epoch": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0.0
+        }
+      }
+    }
+  }
+}

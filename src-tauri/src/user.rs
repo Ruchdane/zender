@@ -1,6 +1,7 @@
 use crate::network::Adapter;
+use schemars::JsonSchema;
 
-#[derive(serde::Serialize, Clone, Debug)]
+#[derive(serde::Serialize, Clone, Debug, JsonSchema)]
 pub struct User {
     hostname: String,
     username: String,

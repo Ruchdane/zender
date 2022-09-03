@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User",
+  "type": "object",
+  "required": [
+    "adapter",
+    "hostname",
+    "username"
+  ],
+  "properties": {
+    "adapter": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Adapter"
+      }
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "Adapter": {
+      "type": "object",
+      "required": [
+        "description",
+        "index",
+        "ips",
+        "name"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "ips": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,13 +1,14 @@
+use schemars::JsonSchema;
 use std::error::Error as StdError;
 use std::{fmt, io};
 
-#[derive(Serialize)]
+#[derive(Serialize, JsonSchema)]
 pub enum ErrorType {
     Io,
 }
 
 use serde::Serialize;
-#[derive(Serialize)]
+#[derive(Serialize, JsonSchema)]
 pub struct Error {
     r#type: ErrorType,
     message: String,
