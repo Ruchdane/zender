@@ -1,145 +1,106 @@
 import m from "mithril";
 import { routes } from "../../routes";
-import { AddFiles } from "../../controller/file";
-import "../../Material/material.scss";
-import "../style.scss";
-import "../../Material/button/button.scss";
+import { path } from "@tauri-apps/api";
+
+import "./home.scss";
 
 import Sidebar from "../../components/sidebar/sidebar";
-import FileView from "../../components/file/file";
-import Tooltip from "../../Material/tooltip/tooltip.js";
+import { FilesGridView } from "./FilesGridView";
+import { FilesListView } from "./FilesListView";
+import { Path } from "./Path";
+import { Button, Icons, Tooltip } from "construct-ui";
+import { GetNonHiddenFilesInPath } from "../../controller/file";
 
-import file from "../../components/file/file";
-
-const settings = {
-    files: new Set(),
-    removeSelection() {
-        this.files = new Set(
-            [...this.files].filter(
-                (_, x) => !this.header_option.selection.has(x)
-            )
-        );
-        this.header_option.selection.clear();
-    },
-    onAddFiles(e) {
-        AddFiles((files) => {
-            files.forEach((file) => settings.files.add(file));
-            m.redraw();
-        });
-    },
-    header_option: {
-        list: false,
-        selection: new Set(),
-        isSelectionEmpty() {
-            return this.selection.size != 0;
-        },
-        isSelected(i) {
-            return this.selection.has(i);
-        },
-        clickOnElement(i) {
-            if (!this.selection.delete(i)) this.selection.add(i);
-        },
-        onListClick() {
-            this.list = !this.list;
-        },
-    },
+// import file from "../../components/file/file";
+export const model = {
+	files: [],
+	selection: new Set(),
+	_path: "",
+	get path() {
+		return this._path;
+	},
+	set path(value) {
+		if (this._path !== value)
+			this._path = value;
+	},
+	async init() {
+		try {
+			model._path = await path.homeDir();
+			model.files = await GetNonHiddenFilesInPath(model._path);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	goToParentDir() {
+		this._path = this._path.substring(0, this._path.length - 1).slice(0, this._path.lastIndexOf(path.sep))
+	},
+	displayList: false,
+	switchDisplay() {
+		this.displayList = !this.displayList
+	},
+	addSelection(i) {
+		// So try to delete it if it send false then it doesn't exist so ceate
+		if (this.selection.delete(i))
+			this.selection.add(i)
+	},
 };
 const Home = {
-    oninit(vnode) {
-        routes.settile();
-    },
-    view(vnode) {
-        return (
-            <>
-                <Sidebar />
-                <main class="home">
-                    <div class="header">
-                        <div>Fichier a partager </div>
-                        <div class="header-options">
-                            {!settings.header_option.list ? (
-                                <button
-                                    aria-lable="Toogle list view"
-                                    class="tool"
-                                    onclick={(e) =>
-                                        settings.header_option.onListClick()
-                                    }>
-                                    <i class="bi bi-list" />
-                                    <Tooltip> Toogle list view </Tooltip>
-                                </button>
-                            ) : (
-                                <button
-                                    aria-lable="Toogle grid view"
-                                    onclick={(e) =>
-                                        settings.header_option.onListClick()
-                                    }>
-                                    <i class="bi bi-grid" />{" "}
-                                </button>
-                            )}
-                            <button onclick={settings.onAddFiles}>
-                                <i class="bi bi-plus"></i>
-                            </button>
-                            <button
-                                aria-lable="Delete selection"
-                                disabled={
-                                    !settings.header_option.isSelectionEmpty()
-                                }
-                                onclick={() => settings.removeSelection()}>
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <hr />
-                    {!settings.header_option.list ? (
-                        <div class="files-grid">
-                            {Array.from(settings.files, (path, i) => {
-                                return m(FileView, {
-                                    path,
-                                    grid: true,
-                                    id: i,
-                                    selected:
-                                        settings.header_option.isSelected(i),
-                                    onclick: () => {
-                                        settings.header_option.clickOnElement(
-                                            i
-                                        );
-                                    },
-                                });
-                            })}
-                        </div>
-                    ) : (
-                        <div>
-                            <table class="table files-list">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Taille</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Array.from(settings.files, (path, i) => {
-                                        return m(FileView, {
-                                            path,
-                                            grid: false,
-                                            id: i,
-                                            selected:
-                                                settings.header_option.isSelected(
-                                                    i
-                                                ),
-                                            onclick: () => {
-                                                settings.header_option.clickOnElement(
-                                                    i
-                                                );
-                                            },
-                                        });
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
-                </main>
-            </>
-        );
-    },
+	oninit(vnode) {
+		routes.settile();
+		model.init().then(() => m.redraw())
+	},
+	view(vnode) {
+		const displayName = model.displayList ? "list" : "grid";
+		const tooltip = `Toogle ${displayName}  view`
+		return (
+			<>
+				<Sidebar />
+				<main class="home">
+					<div class="header">
+						<div>
+							<Tooltip
+								content="Go to parent dir"
+								trigger={<Button
+									aria-label={"Go to parent dir"}
+									iconLeft={Icons.ARROW_UP_RIGHT}
+									onclick={(e) => model.goToParentDir()} />
+								} />
+							<Path
+								path={model.path}
+								updatePath={(newPath) => (model.path = newPath)}
+							/>
+						</div>
+						<div class="header-options">
+							<Tooltip
+								content={tooltip}
+								trigger={<Button
+									aria-label={tooltip}
+									iconLeft={!model.displayList ? Icons.LIST : Icons.GRID}
+									onclick={(e) => model.switchDisplay()} />
+								} />
+						</div>
+					</div>
+					<hr />
+					<div class={`files-${displayName}`}>
+						{
+							m(model.displayList ? FilesListView : FilesGridView, {
+								files: model.files,
+								isSelected(i) {
+									model.selection?.has(i)
+								},
+								onclick(i) {
+									model.addSelection(i)
+								},
+								onDoubleClick(i) {
+									model.path = model.files[i]?.path
+								}
+							})
+						}
+					</div>
+
+				</main>
+			</>
+		);
+	},
 };
 export default Home;

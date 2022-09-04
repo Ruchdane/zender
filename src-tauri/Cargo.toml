@@ -1,11 +1,11 @@
 [package]
-name = "app"
+name = "zender"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
-default-run = "app"
+description = "A file sharing desktop App"
+authors = ["AMADOU Ruchdane"]
+license = "MIT"
+repository = "https://github.com/Ruchdane/zender"
+default-run = "zender"
 edition = "2021"
 rust-version = "1.57"
 
@@ -27,7 +27,7 @@ serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 pnet = "0.31.0"
 pnet_datalink = "0.31.0"
-tauri = { version = "1.0.0-rc.9", features = ["cli", "dialog-message", "dialog-open", "fs-copy-file", "fs-create-dir", "fs-read-dir", "fs-read-file", "fs-write-file"] }
+tauri = { version = "1.0.0-rc.9", features = ["cli", "dialog-message", "dialog-open", "fs-copy-file", "fs-create-dir", "fs-read-dir", "fs-read-file", "fs-write-file", "path-all"] }
 hostname = "0.3.1"
 whoami = "1.2.1"
 mime = "0.3"

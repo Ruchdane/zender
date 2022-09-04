@@ -1,34 +1,37 @@
-@import '../Material/material.scss';
+@import '../style.scss';
 
-@mixin make-container($padding-x: $container-padding-x,$width: 50%) {
-    width: $width;
-    padding-right: $padding-x;
-    padding-left: $padding-x;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  
+%content{
+  width: 100%;
+  height: 100vh;
+} 
 
-.home{
-    @include  make-container(20px, 96%);
-    .header{
-        display: flex;
-        padding-top: 10px;
-        justify-content: space-between;
-    }
-    hr{
-        color: $primary-dark;
-    }
-    .files-grid{
-        display: flex;
-        flex-wrap: wrap;
-    }
+.app {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--color);
+  display: flex;
+  overflow-y: auto;
 }
 
-.files-grid{
-    .file{
-        flex:0 0 auto;
-        margin-left: 5px;
-        margin-bottom: 5px;
-    }
+.icon {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.cui-popover-content {
+  display: inline-block;
+  background: var(--bg);
+  color: var(--color)!important;
+  border-radius: 3px;
+  padding: 15px;
+  border: solid 1px #c5cdd1;
+  box-shadow: 0 16px 24px -8px rgb(67 90 111 / 30%);
+}
+
+.cui-popover-arrow{
+  background: var(--bg);
 }

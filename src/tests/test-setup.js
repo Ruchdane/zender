@@ -1,8 +1,8 @@
 const o = require("ospec");
 const jsdom = require("jsdom");
 const dom = new jsdom.JSDOM("", {
-    // So we can get `requestAnimationFrame`
-    pretendToBeVisual: true,
+	// So we can get `requestAnimationFrame`
+	pretendToBeVisual: true,
 });
 
 // Fill in the globals Mithril needs to operate. Also, the first two are often
@@ -16,5 +16,5 @@ require("mithril");
 
 // And now, make sure JSDOM ends when the tests end.
 o.after(function () {
-    dom.window.close();
+	dom.window.close();
 });

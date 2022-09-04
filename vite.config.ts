@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineConfig({
-  // plugins: [eslintPlugin()],
+  plugins: [eslintPlugin()],
   // prevent vite from obscuring rust errors
   clearScreen: false,
   // Tauri expects a fixed port, fail if that port is not available
@@ -19,9 +19,9 @@ export default defineConfig({
   // env variables
   envPrefix: ['VITE_', 'TAURI_'],
   build: {
-    rollupOptions:{
-        input:['index.html',"splashscreen.html"]
-      },
+    rollupOptions: {
+      input: ['index.html', "splashscreen.html"]
+    },
     // Tauri supports es2021
     target: ['es2021', 'chrome100', 'safari13'],
     // don't minify for debug builds
@@ -31,8 +31,9 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    setupFiles: ['tests/setup.ts'],
     environment: 'jsdom',
-    root:"src-mithril",
+    root: "src",
     transformMode: {
       web: [/.[tj]sx$/],
     }

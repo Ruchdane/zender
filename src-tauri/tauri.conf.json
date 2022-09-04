@@ -35,7 +35,7 @@
     "allowlist": {
       "dialog": {
         "open": true,
-        "message":true
+        "message": true
       },
       "fs": {
         "readFile": true,
@@ -43,6 +43,9 @@
         "readDir": true,
         "copyFile": true,
         "createDir": true
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {
@@ -94,11 +97,11 @@
         "visible": false
       },
       {
-          "width": 400,
-          "height": 200,
-          "decorations": false,
-          "url": "/splashscreen.html",
-          "label": "splashscreen"
+        "width": 400,
+        "height": 200,
+        "decorations": false,
+        "url": "/splashscreen.html",
+        "label": "splashscreen"
       }
     ]
   }
