@@ -7,6 +7,7 @@ import { vi } from "vitest";
 const dom = new JSDOM("", {
     // So we can get `requestAnimationFrame`
     pretendToBeVisual: true,
+    runScripts: 'dangerously',
 });
 
 // Fill in the globals Mithril.js needs to operate. Also, the first two are often
