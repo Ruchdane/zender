@@ -2,6 +2,7 @@
 // TODO See if it is necessary to switch to tokio
 // TODO find a way to use osString
 use crate::error::{Error, ErrorType, Result};
+use log::info;
 use serde::Serialize;
 use std::ffi::OsString;
 // use std::fs;
@@ -182,10 +183,10 @@ impl Metadata {
 mod util {
     use super::*;
     use std::fs::Metadata;
-    
+
     #[cfg(windows)]
     use std::os::windows::fs::MetadataExt;
-    
+
     #[inline]
     pub fn get_type(filename: &str) -> String {
         mime_guess::from_path(filename)
@@ -406,9 +407,11 @@ mod test {
 
 #[tauri::command]
 pub async fn get_sysdata_of_path(path: &str) -> Result<Sysdata> {
+    info!("Get sysdata of path {}", path);
     Sysdata::new(path.to_string()).await
 }
 #[tauri::command]
 pub async fn get_metadata_of_path(path: &str) -> Result<Metadata> {
+    info!("Get sysdata of path {}", path);
     Metadata::new(path).await
 }

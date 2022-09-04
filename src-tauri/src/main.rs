@@ -1,6 +1,8 @@
 // use tauri::api::cli::get_matches;
 // use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
+use log::info;
+
 mod commands;
 mod error;
 mod file;
@@ -28,16 +30,21 @@ async fn main() -> error::Result<()> {
 
     // Setup logging
     std::env::set_var("RUST_BACKTRACE", "1");
+    std::env::set_var("RUST_LOG", "debug");
     env_logger::init();
 
     // Setup network
-    let network_state = network::NetworkState::init("127.0.0.0", "8192").await?;
+    info!("Initiating network connection");
+    let network_state = network::NetworkState::init(8677).await?;
+    info!(
+        "Network connection initiated : {:#?}",
+        network_state.listener
+    );
     // Windows
     tauri::Builder::default()
         // .menu(menu)
         .manage(network_state)
         .invoke_handler(tauri::generate_handler![
-            commands::who_invoked_you,
             commands::close_splashscreen,
             file::get_sysdata_of_path,
             file::get_metadata_of_path,
