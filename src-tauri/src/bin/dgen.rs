@@ -1,4 +1,4 @@
-use app::{error::Error, file::Metadata, user::User};
+use zender::{error::Error, file::Metadata, user::User};
 use schemars::{schema::RootSchema, schema_for};
 fn write_schema(dir: &std::path::Path, name: &str, schema: &RootSchema) -> std::io::Result<()> {
     let output = serde_json::to_string_pretty(schema).unwrap();

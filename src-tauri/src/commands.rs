@@ -1,3 +1,4 @@
+use log::info;
 use tauri::Manager;
 
 #[tauri::command]
@@ -9,6 +10,7 @@ pub fn who_invoked_you(invoker: String) {
 // This command must be async so that it doesn't run on the main thread.
 #[tauri::command]
 pub async fn close_splashscreen(window: tauri::Window) {
+    info!("Close splashscreen");
   // Close splashscreen
   if let Some(splashscreen) = window.get_window("splashscreen") {
     splashscreen.close().unwrap();
