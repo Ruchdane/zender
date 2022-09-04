@@ -5,6 +5,7 @@ use crate::error::{Error, ErrorType, Result};
 use serde::Serialize;
 use std::ffi::OsString;
 // use std::fs;
+use schemars::JsonSchema;
 use std::io::Result as IoResult;
 use std::path::Path;
 use std::time::SystemTime;
@@ -12,7 +13,7 @@ use tokio::fs;
 
 // INFO No recursion for the time being( item inside a folder)
 /// Global "item" Information
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, JsonSchema)]
 pub struct Sysdata {
     path: String,
     basename: OsString,
@@ -66,9 +67,9 @@ impl Sysdata {
 }
 
 /// Specifique Information about file
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, JsonSchema)]
 pub struct FileMetadata {
-    r#type: String,
+    filetype: String,
     size: u64,
     sysdata: Sysdata,
 }
@@ -80,14 +81,14 @@ impl FileMetadata {
     ///     - Path is not valid
     ///     - User do not have permision on this path
     pub async fn new(path: &str, sysdata: Option<Sysdata>) -> Result<Self> {
-        let r#type = util::get_type(path);
+        let filetype = util::get_type(path);
         let size = fs::metadata(path).await?.len();
         let sysdata = match sysdata {
             Some(value) => value,
             None => Sysdata::new(path.to_string()).await?,
         };
         Ok(Self {
-            r#type,
+            filetype,
             size,
             sysdata,
         })
@@ -95,7 +96,7 @@ impl FileMetadata {
 }
 
 /// Specifique Information about a folder
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, JsonSchema)]
 pub struct FolderMetadata {
     /// The count of everything that can be found inside
     children: Vec<String>,
@@ -127,7 +128,7 @@ impl FolderMetadata {
 }
 
 /// Specifique Information about a link
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, JsonSchema)]
 pub struct LinkMetadata {
     path: String,
     sysdata: Sysdata,
@@ -152,8 +153,7 @@ impl LinkMetadata {
 
 /// Information on everything that can be found on the disk
 
-#[derive(Debug, Serialize)]
-#[serde(tag = "type")]
+#[derive(Debug, Serialize, JsonSchema)]
 pub enum Metadata {
     File(FileMetadata),
     Folder(FolderMetadata),

@@ -12,7 +12,8 @@
         "test:view": "npx vitest -r src-mithril/view",
         "test:integration": "cypress run",
         "format": "prettier '**/*.{js,jsx}' --write",
-        "lint": "eslint '**/*.{js,jsx}' --fix"
+        "lint": "eslint '**/*.{js,jsx}' --fix",
+        "gen":"cargo r --bin dgen --manifest-path src-tauri/Cargo.toml && npx json2ts -i src-tauri/schemas -o types/"
     },
     "author": "",
     "license": "ISC",
@@ -38,6 +39,7 @@
     "dependencies": {
         "@tauri-apps/api": "^1.0.1",
         "construct-ui": "^0.3.3",
+        "json-schema-to-typescript": "^11.0.2",
         "mithril": "^2.2.2",
         "ospec": "^4.1.6"
     }

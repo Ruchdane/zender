@@ -1,6 +1,10 @@
 use crate::network::Adapter;
+use schemars::JsonSchema;
+use tokio::net::TcpStream;
 
-#[derive(serde::Serialize, Clone, Debug)]
+use crate::error::Result;
+
+#[derive(serde::Serialize, Clone, Debug, JsonSchema)]
 pub struct User {
     hostname: String,
     username: String,
@@ -15,6 +19,10 @@ impl User {
             username: whoami::username(),
             adapter: Adapter::get_adapter_list(),
         }
+    }
+
+    pub fn new(socket: TcpStream) -> Result<User> {
+        todo!()
     }
 }
 

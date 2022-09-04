@@ -6,7 +6,10 @@ mod error;
 mod file;
 mod network;
 mod user;
-fn main() {
+
+#[tokio::main]
+async fn main() -> error::Result<()> {
+    // Parse arg
     // let context = tauri::generate_context!();
     // let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     // let close = CustomMenuItem::new("close".to_string(), "Close");
@@ -22,15 +25,28 @@ fn main() {
     //   }
     //   Err(_) => {}
     // };
+
+    // Setup logging
+    std::env::set_var("RUST_BACKTRACE", "1");
+    env_logger::init();
+
+    // Setup network
+    let network_state = network::NetworkState::init("127.0.0.0", "8192").await?;
+    // Windows
     tauri::Builder::default()
         // .menu(menu)
+        .manage(network_state)
         .invoke_handler(tauri::generate_handler![
             commands::who_invoked_you,
             commands::close_splashscreen,
             file::get_sysdata_of_path,
             file::get_metadata_of_path,
-            user::get_local_user
+            user::get_local_user,
+            network::serve,
+            network::connect,
+            network::get_peers,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+    Ok(())
 }

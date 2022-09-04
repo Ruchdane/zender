@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Error",
+  "type": "object",
+  "required": [
+    "message",
+    "type"
+  ],
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/definitions/ErrorType"
+    }
+  },
+  "definitions": {
+    "ErrorType": {
+      "type": "string",
+      "enum": [
+        "Io"
+      ]
+    }
+  }
+}
