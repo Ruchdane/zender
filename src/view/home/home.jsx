@@ -9,20 +9,19 @@ import { FilesGridView } from "./FilesGridView";
 import { FilesListView } from "./FilesListView";
 import { Path } from "./Path";
 import { Button, Icons, Tooltip } from "construct-ui";
-import { GetMetadata, MetadataType } from "../../controller/file";
-import { OsStringDeserialize } from "../../util";
+import { GetMetadata, OsStringDeserialize } from "../../controller/file";
+import { match, unwrap } from "../../controller/pattern";
 
-// import file from "../../components/file/file";
 export const filesModel = {
     metadatas: [],
     async load(paths) {
         this.metadatas = Array.from(paths, () => undefined);
-
+        let metadata;
+        let sysdata;
         for (let i = 0; i < this.metadatas.length; i++) {
-            const metadata = await GetMetadata(paths[i]);
-            metadata.sysdata.basename = OsStringDeserialize(
-                metadata.sysdata.basename
-            );
+            metadata = await GetMetadata(paths[i]);
+            sysdata = unwrap(metadata).sysdata;
+            sysdata.basename = OsStringDeserialize(sysdata.basename);
             this.metadatas[i] = metadata;
             m.redraw();
         }
@@ -41,8 +40,8 @@ export const model = {
             GetMetadata(value).then((metadata) => this.load(metadata));
         }
     },
-    async load(metadata) {
-        if (metadata.type !== MetadataType.Folder) return;
+    load(metadata) {
+        if (!metadata.is_dir) return;
         this._path = metadata.sysdata.path;
         model.files = metadata.children;
         filesModel.load(model.files);
@@ -50,10 +49,12 @@ export const model = {
     async init() {
         model._path = await path.homeDir();
         const metadata = await GetMetadata(model._path);
-        if (metadata.type === MetadataType.Folder) {
-            model.files = metadata.children;
-            filesModel.load(model.files);
-        }
+        match(metadata, {
+            Folder: info => {
+                model.files = info.children;
+                filesModel.load(model.files);
+            }
+        })
     },
     shareSelection() {
         console.log(this.selection.values());
@@ -61,8 +62,8 @@ export const model = {
     },
     async goToParentDir() {
         const result = getParentPath(this._path, path.sep);
-        const metadata = await GetMetadata(result);
-        await this.load(metadata);
+        const metadata = unwrap(await GetMetadata(result));
+        this.load(metadata);
     },
     canGoToParentDir() {
         return this.path.split(path.sep).length === 1;

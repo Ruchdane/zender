@@ -3,74 +3,46 @@
 .users {
     @extend %content;
     display: flex;
-    .addresse-bar {    
+
+    .host-info {
         flex-flow: column;
+        background-color: var(--bg-secondary);
         display: flex;
-        background-color: $primary-shade-4;
+        flex-direction: column;
+        border-left: 3px solid var(--bg);
         padding: 5px;
-        :first-child{
-            justify-content: stretch;   
-            align-self: center;
-        }
-        :last-child{
-            flex-wrap: wrap;
-        }
-        & > * {
-            display: flex;
-            justify-content: space-between;
-        }
-        label,center{
-            font-weight: bolder;
-        }
-        center{
-            align-self: center;
-        }
-        .addresse{
+        align-content: space-between;
+        align-items: center;
+    }
+
+    .no-peer {
+        cursor: pointer;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+    }
+}
+
+.users .host-info .host {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+
+    .name {
+        text-align: center;
+    }
+
+    ul.addresses {
+        list-style: none;
+
+        li.addresse {
             display: flex;
             align-items: center;
             flex-direction: column;
             flex-wrap: wrap;
         }
-    }
-    .no-peer{
-        color: fade-out($color: $primary-text, $amount: 0.1);
-        cursor: pointer;
-        position: relative;
-        top: 50%;
-        margin-left:auto;
-        margin-right: auto;
-        overflow: hidden;
-    }
-    :last-child{
-        overflow-y: auto;
-    }
-    .users-grid {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 1rem;
-        
-    }
-}
-
-.user {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    padding-right: 0.7rem;
-    padding-left: 0.7rem;
-    padding-top: 0.3rem;
-    margin: 6px;
-    padding-bottom: 0.3rem;
-    cursor: pointer;
-    text-overflow: ellipsis;
-
-    &:hover {
-        background-color: fade-out($color: var(--bg), $amount: 0.5);
-        color: $secondary-light ;
-    }
-
-    &:active {
-        background-color: var(--bg);
-        color: $secondary-light;
     }
 }

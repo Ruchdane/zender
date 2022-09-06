@@ -34,16 +34,16 @@ async fn main() -> error::Result<()> {
     env_logger::init();
 
     // Setup network
-    info!("Initiating network connection");
-    let network_state = network::NetworkState::init(8677).await?;
-    info!(
-        "Network connection initiated : {:#?}",
-        network_state.listener
-    );
+    // info!("Initiating network connection");
+    // let network_state = network::NetworkState::init(8677).await?;
+    // info!(
+    //     "Network connection initiated : {:#?}",
+    //     network_state.listener
+    // );
     // Windows
     tauri::Builder::default()
         // .menu(menu)
-        .manage(network_state)
+        // .manage(network_state)
         .invoke_handler(tauri::generate_handler![
             commands::close_splashscreen,
             file::get_sysdata_of_path,

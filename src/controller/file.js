@@ -1,50 +1,56 @@
 import { invoke } from "@tauri-apps/api";
 import { log } from "./error";
-// I would like to switch to typescript 
-// https://dev.to/dimfeld/synchronizing-rust-types-with-typescript-1maa
+import { match } from "./pattern";
+/**
+ * @typedef {import("../../../types/metadata").Metadata} Metadata
+ * @typedef {import("../../../types/metadata").Sysdata} Sysdata
+ * @typedef {import("../../../types/metadata").FolderMetadata} FolderMetadata
+ * @typedef {import("../../../types/metadata").FileMetadata} FileMetadata
+ * @typedef {import("../../../types/metadata").LinkMetadata} LinkMetadata
+ */
+
+// TODO check tha whenever match is used on metadate the args are in this array
+// export const MetadataType = ["File", "Folder", "Link"]
 
 // Is it necessary why not simply use the invoke 
 // and let them handle the error
-export const MetadataType = {
-	File: "File",
-	Folder: "Folder",
-	Link: "Link",
-}
 // FIXME error lorsqu'on recherche les metadata de C
+// Are these function realy necessary
+/**
+ * @param {string} path 
+ * @returns {Promise<Metadata>}
+ */
 export async function GetMetadata(path) {
 	try {
-		const metadata = await invoke("get_metadata_of_path", { path });
-		setTimeout(() => { }, 1000000);
-		return metadata;
+		return await invoke("get_metadata_of_path", { path });
 	} catch (err) {
-		return await log(err);
+		throw log(err);
 	}
 }
 
+/**
+ * @param {string} path 
+ * @returns {Promise<Sysdata>}
+ */
 export async function GetSysdata(path) {
 	try {
-		const sysdata = await invoke("get_sysdata_of_path", { path });
-		return sysdata
+		return await invoke("get_sysdata_of_path", { path });
 	} catch (err) {
-		return await log(err);
+		throw log(err);
 	}
 }
-
-export async function GetLocalUser() {
+/**
+ * 
+ * @param {import("../../types/metadata").OsString} value 
+ * @returns 
+ */
+export function OsStringDeserialize(value) {
 	try {
-		const user = await invoke("get_local_user");
-		return user
-	} catch (err) {
-		return await log(err);
-	}
-}
-
-export async function GetPeer() {
-	try {
-		// const user = await invoke("get_local_user");
-		return []
-		// eslint-disable-next-line no-unreachable
-	} catch (err) {
-		return await log(err);
+		return match(value, {
+			Unix: encodedString => encodedString,
+			Windows: encodeString => String.fromCharCode.apply(null, encodeString)
+		});
+	} catch (value) {
+		return value
 	}
 }

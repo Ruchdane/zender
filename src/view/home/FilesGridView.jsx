@@ -1,32 +1,25 @@
 import { Icon, Icons, Tooltip } from "construct-ui";
 import m from "mithril";
-import { MetadataType } from "../../controller/file";
+import { match, unwrap } from "../../controller/pattern";
 
 const MimeIcon = {
     // TODO Something like https://github.com/kimlimjustin/xplorer/tree/master/lib
     view(vnode) {
-
         const metadata = vnode.attrs.metadata
-        if (metadata.type === MetadataType.Link) {
-            return m(Icon, {
+        return match(metadata, {
+            File: info => m(Icon, {
                 class: vnode.attrs.class,
                 name: Icons.LINK
-            })
-        }
-        else if (metadata.type === MetadataType.Folder) {
-            return m(Icon, {
+            }),
+            Folder: info => m(Icon, {
                 class: vnode.attrs.class,
                 name: Icons.FOLDER
-            })
-        }
-        // File variant of Metadata overide type field of metadata
-        // with the memetype
-        else {
-            return m(Icon, {
+            }),
+            Link: info => m(Icon, {
                 class: vnode.attrs.class,
                 name: Icons.FILE
             })
-        }
+        })
     }
 }
 
@@ -52,7 +45,7 @@ export const FilesGridView = {
                 return m(".skeleton", {
                     key: i,
                 }, m(".icon.loading"), m(".title.loading"))
-            const sysdata = metadata.sysdata;
+            const sysdata = unwrap(metadata).sysdata;
             if (sysdata === undefined) {
                 console.error("this shouldn happen", metadata);
             }
