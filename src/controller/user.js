@@ -1,28 +1,23 @@
+import m from 'mithril';
 import { invoke } from "@tauri-apps/api";
-import { log } from "./error";
-/**
- * @typedef {Promise<import("../../types/user").User>} User
- */
 
-/**
- * @return {User}
- */
-export async function GetLocalUser() {
-    try {
-        const user = await invoke("get_local_user");
-        return user;
-    } catch (err) {
-        throw log(err);
-    }
-}
+export const model = {
+	user: undefined,
+	peers: [],
+    init() {
+		invoke("get_local_user")
+            .then(user => {
+                model.user = user
+                m.redraw();
+            }
+        );
+		invoke("get_peers")
+            .then(peers => {
+                model.peers = peers
+                m.redraw();
+            }
+        );
+	}
+};
 
-/**
- * @return {Array[User]}
- */
-export async function GetPeer() {
-    try {
-        return await invoke("get_peers");
-    } catch (err) {
-        throw log(err);
-    }
-}
+export default model;

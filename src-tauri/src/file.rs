@@ -2,7 +2,7 @@
 // TODO See if it is necessary to switch to tokio
 // TODO find a way to use osString
 use crate::error::{Error, ErrorType, Result};
-use log::info;
+use log::{error, info};
 use serde::Serialize;
 use std::ffi::OsString;
 // use std::fs;
@@ -408,10 +408,18 @@ mod test {
 #[tauri::command]
 pub async fn get_sysdata_of_path(path: &str) -> Result<Sysdata> {
     info!("Get sysdata of path {}", path);
-    Sysdata::new(path.to_string()).await
+    let result = Sysdata::new(path.to_string()).await;
+    if result.is_err() {
+        error!("Unable to get metadata of path {}", path)
+    }
+    result
 }
 #[tauri::command]
 pub async fn get_metadata_of_path(path: &str) -> Result<Metadata> {
     info!("Get sysdata of path {}", path);
-    Metadata::new(path).await
+    let result = Metadata::new(path).await;
+    if result.is_err() {
+        error!("Unable to get metadata of path {}", path)
+    }
+    result
 }

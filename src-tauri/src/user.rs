@@ -1,32 +1,34 @@
-use crate::network::Adapter;
+use std::sync::{Arc, Mutex};
+
 use schemars::JsonSchema;
-use tokio::net::TcpStream;
+use serde::{Deserialize, Serialize};
+use tauri::State;
 
 use crate::error::Result;
 
-#[derive(serde::Serialize, Clone, Debug, JsonSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct User {
     hostname: String,
     username: String,
-    adapter: Vec<Adapter>,
+    pub addreses: Vec<String>,
 }
 
 // Is it necessary to write test ?
 impl User {
-    pub fn current() -> User {
-        User {
+    pub fn current() -> Result<User> {
+        Ok(User {
             hostname: whoami::hostname(),
             username: whoami::username(),
-            adapter: Adapter::get_adapter_list(),
-        }
+            addreses: vec![],
+        })
     }
 
-    pub fn new(socket: TcpStream) -> Result<User> {
-        todo!()
+    pub fn title(&self) -> String {
+        format!("{}@{}", self.hostname, self.username)
     }
 }
 
 #[tauri::command]
-pub async fn get_local_user() -> User {
-    User::current()
+pub async fn get_local_user(user: State<'_, Arc<Mutex<User>>>) -> Result<User> {
+    Ok(user.lock().unwrap().clone())
 }
